@@ -1,0 +1,10 @@
+<center>
+    {% include 'base/navbar.html' %}
+    
+    <h1>Salut {{ session['username'] }} !</h1>
+    <p>Que souhaite tu faire ?</p>
+    <button onclick="window.location.href = '/auth/accountmanage';">Gérer mon compte</button>
+    <button onclick="window.location.href = '/auth/logout';">Se deconnecter</button>
+    <button onclick="window.location.href = '/admin';">Panel admin</button>
+    {% include 'base/footer.html' %}
+</center>

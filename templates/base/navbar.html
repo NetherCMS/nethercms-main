@@ -41,6 +41,14 @@ color : #fefefe ;
     <li><a href={{discord_link}}>Discord</a></li>
     <li><a href="#">‎ ‎ ‎‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎  ‎ ‎ ‎ ‎ ‎ ‎ </a></li>
     <li><a href="#">Venez jouer ! : {{MC_SERVER_IP}}{{MC_SERVER_PORT}}</a></li>
+    <li>
+      {% if 'username' in session %}
+          <a href="/auth/accountmenu">Bonjour, {{ session['username'] }} !</a>
+      {% else %}
+          <a href="/auth/login">Se Connecter</a>
+      {% endif %}
+  </li>
+  
   </ul>
   
   
