@@ -57,7 +57,12 @@ def get_asset(filename):
         return send_file(file_path)
     else:
         return redirect("/404")
-    
+@app.route('/others/requirelogin')
+def others_login_require():
+    if 'username' in session:
+        return render_template("/others/requirelogin.html",title=main_config.SERVER_TITLE,datetime_render=str(datetime.now()),logo_path=main_config.SERVER_LOGO,discord_link=main_config.DISCORD_SERVER_LINK)
+    else:
+        return redirect("/auth/login") 
 # AUTHENFICATION PART
 @app.route('/auth/login', methods=['GET', 'POST'])
 def auth_login():
@@ -84,7 +89,7 @@ def auth_logout():
         session.pop('username', None)
         return redirect('/')
     else:
-        return("TU ES PAS CONNECTER !")
+        return redirect("/others/requirelogin")
 @app.route('/auth/accountmenu')
 def auth_accountmenu():
     if 'username' in session:
@@ -111,7 +116,7 @@ def auth_register():
         users = load_users()
 
         if username not in users:
-            console.info(f"[NetherCMS/Accounts/Register] : New user : username : {username}")
+            console.print_info(f"[NetherCMS/Accounts/Register] : New user : username : {username}")
             users[username] = {
                 'password': password,
                 'email': email,
@@ -159,8 +164,12 @@ def server_error(e):
 def notauthorized(): 
     return render_template("error/403.html",title=main_config.SERVER_TITLE,datetime_render=str(datetime.now()),logo_path=main_config.SERVER_LOGO,discord_link=main_config.DISCORD_SERVER_LINK) 
 
-# others
+# API 
 
+@app.route("/api/userlink/<id>")
+def api_userlink():
+    return("soon")
+    
 
 try:
     if __name__ == '__main__':
@@ -168,6 +177,6 @@ try:
 
         app.run(debug=False,host=main_config.NETHERCMS_ADDRESS,port=main_config.NETHERCMS_PORT)
 except Exception as e:
-    console.alert("Failed to init webserver error :")
-    console.alert(e)
+    console.print_error("Failed to init webserver error :")
+    console.print_error(e)
     exit(0)

@@ -1,1 +1,8 @@
-{}
+{
+  "popo": {
+    "email": "admin@admin.fr",
+    "mcuuid": 0,
+    "password": "changepassword",
+    "permissions": 2
+  }
+}

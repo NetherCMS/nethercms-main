@@ -1,9 +1,16 @@
 import datetime
 
-def info(text):
-    formatted_text = f"\033[91m[INFO] \033[0m : {text} "
-    print(f"[\033{datetime.datetime.now()} \033[0m] {formatted_text}")
+def print_warning(text):
+  current_time = datetime.datetime.now().strftime("[%Y-%m-%d %H:%M:%S]")
+  colored_text = f"\033[93m{current_time} [WARN] : {text}\033[0m"
+  print(colored_text)
 
-def alert(text):
-    formatted_text = f"\033[91m[ALERT] \033[0m : {text} "
-    print(f"[\033{datetime.datetime.now()} \033[0m] {formatted_text}")
+def print_error(text):
+  current_time = datetime.datetime.now().strftime("[%Y-%m-%d %H:%M:%S]")
+  colored_text = f"\033[91m{current_time} [ERROR] : {text}\033[0m"
+  print(colored_text)
+
+def print_info(text):
+  current_time = datetime.datetime.now().strftime("[%Y-%m-%d %H:%M:%S]")
+  colored_text = f"\033[94m{current_time} [INFO] : {text}\033[0m"
+  print(colored_text)
