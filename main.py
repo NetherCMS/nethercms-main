@@ -17,7 +17,8 @@ try:
     from flask import Flask , send_file , render_template , redirect , session , request , json , abort
     from datetime import datetime
     import atexit 
-
+    import threading
+    
     import os
 except Exception as e:
     print("Critical librarie(s) import failed error :")
@@ -25,7 +26,8 @@ except Exception as e:
 
 # Config Import
 try:
-    from config import main_config
+    from config import Loader_main_config as main_config
+    from libs import jsonchecker
 
 except Exception as e:
     print("Critical configuration files import failed error :")
@@ -173,9 +175,20 @@ def api_userlink():
 
 try:
     if __name__ == '__main__':
-        atexit.register(print,"Exiting...")
+        def startwebserver():
+            console.print_info("[ThreadManager] : Web server started !")
+            app.run(debug=False, host=main_config.NETHERCMS_ADDRESS, port=main_config.NETHERCMS_PORT)
+        atexit.register(print, "Exiting...")
+        #Starting JSON RELOADING
+        threadmanager_jsonreloadchecker = threading.Thread(target=jsonchecker.checkreload, args=("config/config.json",))
+        threadmanager_jsonreloadchecker.daemon = True
+        threadmanager_jsonreloadchecker.start()
+        
+        #Starting web server
+        threadmanager_webserver = threading.Thread(target=startwebserver())
+        threadmanager_webserver.daemon = True
+        threadmanager_webserver.start()
 
-        app.run(debug=False,host=main_config.NETHERCMS_ADDRESS,port=main_config.NETHERCMS_PORT)
 except Exception as e:
     console.print_error("Failed to init webserver error :")
     console.print_error(e)

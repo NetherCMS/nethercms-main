@@ -1,4 +1,10 @@
 {
+  "cc": {
+    "email": "cc@cc.cc",
+    "mcuuid": 0,
+    "password": "cc",
+    "permissions": 2
+  },
   "popo": {
     "email": "admin@admin.fr",
     "mcuuid": 0,

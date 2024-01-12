@@ -1,0 +1,24 @@
+from libs import console
+import os
+import json
+import time
+from datetime import datetime
+from config import Loader_main_config
+
+def checkreload(file_path):
+    try: 
+        console.print_info("[ThreadManager] >> CheckReload Thread is activated !")
+
+        last_modified = os.path.getmtime(file_path)
+
+        while True:
+            time.sleep(2)
+            current_modified = os.path.getmtime(file_path)
+
+            if current_modified != last_modified:
+                console.print_warning("[JsonReloading] : JSON live time reloading is currently unstable !")
+                Loader_main_config.load_json()
+                last_modified = current_modified
+    except Exception as e:
+        console.print_error("[ThreadManager] >> An error occurred in CheckReload...")
+        console.print_error(e)
