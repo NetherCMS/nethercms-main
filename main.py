@@ -41,7 +41,7 @@ def save_users(users):
     with open("data/users.json", 'w') as file:
         json.dump(users, file, indent=2) 
 app = Flask(__name__)
-
+main_config.load_json()
 app.secret_key = main_config.NETHERCMS_SECRETKEY
 
 
@@ -173,18 +173,21 @@ def api_userlink():
     return("soon")
     
 
+def startwebserver():
+    console.print_info("[ThreadManager] : Web server started !")
+    app.run(debug=False, host=main_config.NETHERCMS_ADDRESS, port=main_config.NETHERCMS_PORT)
+
 try:
     if __name__ == '__main__':
-        def startwebserver():
-            console.print_info("[ThreadManager] : Web server started !")
-            app.run(debug=False, host=main_config.NETHERCMS_ADDRESS, port=main_config.NETHERCMS_PORT)
-        atexit.register(print, "Exiting...")
-        #Starting JSON RELOADING
-        threadmanager_jsonreloadchecker = threading.Thread(target=jsonchecker.checkreload, args=("config/config.json",))
+        # ...
+
+        # Starting JSON RELOADING
+        json_file_path = "config/config.json"
+        threadmanager_jsonreloadchecker = threading.Thread(target=jsonchecker.checkreload, args=(json_file_path,))
         threadmanager_jsonreloadchecker.daemon = True
         threadmanager_jsonreloadchecker.start()
-        
-        #Starting web server
+
+        # Starting web server
         threadmanager_webserver = threading.Thread(target=startwebserver())
         threadmanager_webserver.daemon = True
         threadmanager_webserver.start()

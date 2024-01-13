@@ -2,11 +2,11 @@
     "MAINTENANCE": false,
     "NETHERCMS_PORT": 80,
     "NETHERCMS_ADDRESS": "0.0.0.0",
-    "NETHERCMS_SECRETKEY": "ZyrA$$!uGkt5sNywTz3",
-    "SERVER_TITLE": "NetherCMS-Demo",
-    "SERVER_DESCRIPTION": "Lorem ipsum",
+    "NETHERCMS_SECRETKEY": "ZyrA$$!uGkt5sNdqsywTz3",
+    "SERVER_TITLE": "NetheraCMS-Test",
+    "SERVER_DESCRIPTION": "concombre",
     "SERVER_LOGO": "",
     "DISCORD_SERVER_LINK": "https://dsc.gg/eletrixteam",
     "SERVER_IP": "0.0.0.0",
-    "SERVER_PORT": 1
+    "SERVER_PORT": 10
 }
