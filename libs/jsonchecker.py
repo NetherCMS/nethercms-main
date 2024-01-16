@@ -17,7 +17,7 @@ def checkreload(file_path):
 
             if current_modified != last_modified:
                 console.print_warning("[JsonReloading] : JSON live time reloading is currently unstable !")
-                Loader_main_config.load_json()
+                Loader_main_config.MAINTENANCE, Loader_main_config.NETHERCMS_PORT, Loader_main_config.NETHERCMS_ADDRESS, Loader_main_config.NETHERCMS_SECRETKEY, Loader_main_config.SERVER_TITLE, Loader_main_config.SERVER_DESCRIPTION, Loader_main_config.SERVER_LOGO, Loader_main_config.DISCORD_SERVER_LINK, Loader_main_config.SERVER_IP, Loader_main_config.SERVER_PORT = Loader_main_config.load_json()
                 last_modified = current_modified
     except Exception as e:
         console.print_error("[ThreadManager] >> An error occurred in CheckReload...")
